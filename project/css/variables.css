@@ -1,0 +1,22 @@
+:root {
+  /* стандартные цвета */
+  --color-txt-active: #000;
+  --color-txt-inactive: #b0b0b0;
+  --color-txt-dialog: #333;
+  --color-bg-dialog: #c8c5d1;
+  --color-bg-dialog-rgb: 200, 197, 209;
+  --color-bg-dialog-contacts: rgb(231, 229, 235);
+  --color-bg-dialog-contacts-select: #f4f3f6;
+  --color-bg-main: #fff;
+  --color-bg-body: #f5f5f5;
+  --color-contrast: #9873ff;
+  --color-error: #f06a4d;
+  /* размеры */
+  --page-min-width: 768px;
+  --page-max-width: 1024px;
+  /* отступы */
+  --dialog-margin-left-small: 15px;
+  --dialog-margin-right-small: 15px;
+  --dialog-margin-left: 30px;
+  --dialog-margin-right: 30px;
+}

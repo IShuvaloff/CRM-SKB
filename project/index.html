@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>CRM SKB</title>
+
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/choices.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/media.css">
+
+  <script defer src="js/choices.min.js"></script>
+  <script defer src="js/inputmask.min.js"></script>
+  <script defer src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+  <script defer src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+  <script defer src="https://unpkg.com/tippy.js@6"></script>
+  <script defer src="js/server.js"></script>
+  <script defer src="js/script.js"></script>
+
+  <link type="image/png" sizes="32x32" rel="icon" href="favicon.png">
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="container flex left center-y header__wrapper">
+      <!-- logo -->
+      <a class="header__logo" href=".">
+        <img src="img/i-logo.svg" alt="skb.">
+      </a>
+      <!-- поиск -->
+      <input class="header__search" id="header-search" type="text" placeholder="Введите запрос">
+    </div>
+  </header>
+
+  <main class="main">
+
+    <section class="clients">
+
+      <div class="container container__header">
+        <h1 class="clients__header">Клиенты</h1>
+      </div>
+
+      <div class="container container__table">
+        <div class="clients__wrapper">
+          <!-- таблица -->
+          <table class="table clients__table">
+            <!-- заголовок -->
+            <thead class="table__header clients__head">
+              <tr>
+                <th class="cell cell-head cell-id">
+                  <div class="cell-head__wrapper" id="cell-header-id" tabindex="0">
+                    ID
+                    <img class="invisible" id="cell-img-id" src="img/i-sort-up.svg" alt="">
+                  </div>
+                </th>
+                <th class="cell cell-head">
+                  <div class="cell-head__wrapper" id="cell-header-fio" tabindex="0">
+                    Фамилия Имя Отчество
+                    <img class="invisible" id="cell-img-fio" src="img/i-sort-up.svg" alt="">
+                    <span class="cell-head__sort-description invisible">А-Я</span>
+                  </div>
+                </th>
+                <th class="cell cell-head">
+                  <div class="cell-head__wrapper" id="cell-header-createdAt" tabindex="0">
+                    Дата и время создания
+                    <img class="invisible" id="cell-img-createdAt" src="img/i-sort-up.svg" alt="">
+                  </div>
+                </th>
+                <th class="cell cell-head">
+                  <div class="cell-head__wrapper" id="cell-header-updatedAt" tabindex="0">
+                    Последние изменения
+                    <img class="invisible" id="cell-img-updatedAt" src="img/i-sort-up.svg" alt="">
+                  </div>
+                </th>
+                <th class="cell cell-head">
+                  Контакты
+                </th>
+                <th class="cell cell-head">
+                  Действия
+                </th>
+              </tr>
+            </thead>
+            <!-- список -->
+            <tbody class="table__body clients__list" id="clients-list">
+              <tr>
+                <td class="clients__loading" id="clients-loading" colspan="6">
+                  <!-- загрузка -->
+                  <div class="loading">
+                    <img class="loading__img" src="img/i-loading.svg" alt="">
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="clients__table--invisible transparent">_</div> <!-- заколебался искать причину обрезания паддингов и марджинов справа у таблицы при уменьшении размера экрана ниже минимальных 768px, добавил невидимый элемент-->
+        </div>
+      </div>
+
+      <!-- <div class="container"> -->
+      <!-- добавление клиента -->
+      <button class="clients__btn btn-add flex center-x center-y" id="btn-client-add">
+        <svg width="23" height="16" viewBox="0 0 23 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M14.5 8C16.71 8 18.5 6.21 18.5 4C18.5 1.79 16.71 0 14.5 0C12.29 0 10.5 1.79 10.5 4C10.5 6.21 12.29 8 14.5 8ZM5.5 6V3H3.5V6H0.5V8H3.5V11H5.5V8H8.5V6H5.5ZM14.5 10C11.83 10 6.5 11.34 6.5 14V16H22.5V14C22.5 11.34 17.17 10 14.5 10Z" />
+        </svg>
+        <span class="btn-add__text">Добавить клиента</span>
+      </button>
+      <!-- </div> -->
+
+    </section>
+
+    <section class="modal" id="modal">
+      <!-- контакт -->
+      <div class="modal__body modal__client  transparent" id="modal-client">
+        <!-- заголовочная информация -->
+        <div class="modal__header-descr">
+          <h1 class="modal__header" id="modal-header">Изменить данные</h1>
+          <span class="modal__descr" id="modal-descr">ID: 123456</span>
+        </div>
+
+        <form action="" class="modal__form form" id="modal-client-form">
+          <!-- фамилия -->
+          <div class="form__wrapper form__wrapper--surname">
+            <label class="form__label" for="client-surname" id="client-surname-id">Фамилия <span
+                class="form__text form__text--required">*</span></label>
+            <div class="">
+              <input class="form__input" type="text" name="surname" id="client-surname" placeholder="Фамилия *"
+                required>
+              <!-- <div class="form__input-error" id="client-surname-error"></div> -->
+            </div>
+          </div>
+          <!-- имя -->
+          <div class="form__wrapper form__wrapper--name">
+            <label class="form__label" for="client-name" id="client-name-id">Имя <span
+                class="form__text form__text--required">*</span></label>
+            <div class="">
+              <input class="form__input" type="text" name="name" id="client-name" placeholder="Имя *" required>
+              <!-- <div class="form__input-error" id="client-name-error"></div> -->
+            </div>
+          </div>
+          <!-- отчество -->
+          <div class="form__wrapper form__wrapper--lastname">
+            <label class="form__label" for="client-lastName" id="client-lastName-id">Отчество</label>
+            <div class="">
+              <input class="form__input" type="text" name="lastName" id="client-lastName" placeholder="Отчество">
+              <!-- <div class="form__input-error" id="client-lastName-error"></div> -->
+            </div>
+          </div>
+
+          <!-- КОНТАКТЫ -->
+          <div class="form__contacts" id="form-contacts">
+            <!-- отдельные контакты (добавляются средствами js)-->
+            <div class="form__wrapper form__wrapper--contacts invisible" id="form-wrapper-contacts"></div>
+            <!-- кнопка добавления контакта -->
+            <button class="button form__btn contacts-btn-add" id="contacts-btn-add" type="button">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M6.99998 3.66668C6.63331 3.66668 6.33331 3.96668 6.33331 4.33334V6.33334H4.33331C3.96665 6.33334 3.66665 6.63334 3.66665 7.00001C3.66665 7.36668 3.96665 7.66668 4.33331 7.66668H6.33331V9.66668C6.33331 10.0333 6.63331 10.3333 6.99998 10.3333C7.36665 10.3333 7.66665 10.0333 7.66665 9.66668V7.66668H9.66665C10.0333 7.66668 10.3333 7.36668 10.3333 7.00001C10.3333 6.63334 10.0333 6.33334 9.66665 6.33334H7.66665V4.33334C7.66665 3.96668 7.36665 3.66668 6.99998 3.66668ZM6.99998 0.333344C3.31998 0.333344 0.333313 3.32001 0.333313 7.00001C0.333313 10.68 3.31998 13.6667 6.99998 13.6667C10.68 13.6667 13.6666 10.68 13.6666 7.00001C13.6666 3.32001 10.68 0.333344 6.99998 0.333344ZM6.99998 12.3333C4.05998 12.3333 1.66665 9.94001 1.66665 7.00001C1.66665 4.06001 4.05998 1.66668 6.99998 1.66668C9.93998 1.66668 12.3333 4.06001 12.3333 7.00001C12.3333 9.94001 9.93998 12.3333 6.99998 12.3333Z"
+                  fill="#9873FF" />
+              </svg>
+              <span class="button__text btn__text--add">Добавить контакт</span>
+            </button>
+          </div>
+
+          <!-- информация об ошибках -->
+          <div class="form__input-error" id="client-error">Ошибка сервера: 404</div>
+
+          <!-- кнопки -->
+          <button class="modal__btn btn-modal-save" id="btn-modal-save" type="button">
+            <div class="btn-modal-save__saving loading invisible" id="client-saving">
+              <svg class="loading__img" width="40" height="40" viewBox="0 0 40 40" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M2 20C2 29.941 10.059 38 20 38C29.941 38 38 29.941 38 20C38 10.059 29.941 2 20 2C17.6755 2 15.454 2.4405 13.414 3.243"
+                  stroke-width="4" stroke-miterlimit="10" stroke-linecap="round" />
+              </svg>
+            </div>
+            <span>Сохранить</span>
+          </button>
+          <a class="modal__delete btn-modal-delete" href="#" id="link-modal-delete">Удалить клиента</a>
+        </form>
+
+        <a class="modal__close" href="#">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M16.2332 1.73333L15.2665 0.766664L8.49985 7.53336L1.73318 0.766696L0.766515 1.73336L7.53318 8.50003L0.766542 15.2667L1.73321 16.2333L8.49985 9.46669L15.2665 16.2334L16.2332 15.2667L9.46651 8.50003L16.2332 1.73333Z" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- диалог -->
+      <div class="modal__body modal__dialog  transparent" id="modal-dialog">
+        <h1 class="modal__header modal__header--dialog">Удалить клиента</h1>
+        <p class="modal__text">Вы действительно хотите удалить данного клиента?</p>
+        <button class="modal__btn btn-modal-delete" id="btn-modal-dialog-delete">Удалить</button>
+        <a class="modal__cancel" href="#">Отмена</a>
+        <a class="modal__close" href="#">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M16.2332 1.73333L15.2665 0.766664L8.49985 7.53336L1.73318 0.766696L0.766515 1.73336L7.53318 8.50003L0.766542 15.2667L1.73321 16.2333L8.49985 9.46669L15.2665 16.2334L16.2332 15.2667L9.46651 8.50003L16.2332 1.73333Z" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="container">
+    <footer class="footer">
+    </footer>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+@media (max-width: 1023.98px) {
+  .cell-btn {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .header {
+    padding: 8px 0;
+  }
+  .header__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .clients__wrapper {
+    padding-left: 10px;
+  }
+  .clients__table--invisible {
+    width: 10px;
+  }
+  .header__logo {
+    width: 24px;
+    height: 24px;
+  }
+  .header__logo:not(:last-child) {
+    margin: 0;
+  }
+  .header__search {
+    display: none;
+  }
+
+  .container__header {
+    padding: 0 10px;
+  }
+  .clients__wrapper {
+    margin-right: 10px;
+    padding-left: 10px;
+  }
+
+  .modal__body {
+    margin: auto 10px;
+    width: calc(100% - 20px);
+  }
+  .modal__client {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .modal__close {
+    right: 10px;
+    top: 10px;
+  }
+
+  .form__contacts {
+    margin-left: calc(-1 * var(--dialog-margin-left-small));
+    margin-right: calc(-1 * var(--dialog-margin-right-small));
+    padding-right: var(--dialog-margin-right-small);
+    padding-left: var(--dialog-margin-left-small);
+  }
+  .form__contacts--empty {
+    padding: 8px;
+  }
+}
